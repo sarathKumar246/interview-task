@@ -1,0 +1,18 @@
+import fs from "fs";
+
+const FILE = "./questions.json";
+
+export function saveQuestionSet(data) {
+  const existing = fs.existsSync(FILE)
+    ? JSON.parse(fs.readFileSync(FILE))
+    : [];
+
+  existing.push(data);
+  fs.writeFileSync(FILE, JSON.stringify(existing, null, 2));
+}
+
+export function getAllQuestionSets() {
+  return fs.existsSync(FILE)
+    ? JSON.parse(fs.readFileSync(FILE))
+    : [];
+}
